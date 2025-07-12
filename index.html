@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clean For Stopwatch</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 3rem;
+      margin: 2rem 0 1rem;
+    }
+    .timer {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      width: 100vw;
+      padding: 0 2rem;
+    }
+    .time-unit {
+      text-align: center;
+      flex: 1;
+    }
+    .value {
+      font-size: 6vw;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .label {
+      font-size: 1.5vw;
+      margin-top: 0.5rem;
+      opacity: 0.75;
+    }
+  </style>
+</head>
+<body>
+  <h1>clean for:</h1>
+  <div class="timer">
+    <div class="time-unit">
+      <div class="value" id="days">0</div>
+      <div class="label">Days</div>
+    </div>
+    <div class="time-unit">
+      <div class="value" id="hours">0</div>
+      <div class="label">Hours</div>
+    </div>
+    <div class="time-unit">
+      <div class="value" id="minutes">0</div>
+      <div class="label">Minutes</div>
+    </div>
+    <div class="time-unit">
+      <div class="value" id="seconds">0</div>
+      <div class="label">Seconds</div>
+    </div>
+    <div class="time-unit">
+      <div class="value" id="milliseconds">0</div>
+      <div class="label">Milliseconds</div>
+    </div>
+  </div>
+<script>
+  const startTime = new Date("2025-07-12T20:30:00+10:00").getTime();
+
+  function updateTimer() {
+    const now = new Date().getTime();
+    let diff = now - startTime;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff %= 1000 * 60 * 60 * 24;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    diff %= 1000 * 60 * 60;
+    const minutes = Math.floor(diff / (1000 * 60));
+    diff %= 1000 * 60;
+    const seconds = Math.floor(diff / 1000);
+    const milliseconds = diff % 1000;
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+    document.getElementById("milliseconds").textContent = milliseconds;
+  }
+
+  setInterval(updateTimer, 10);
+</script>
+</body>
+</html>
